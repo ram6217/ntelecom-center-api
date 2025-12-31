@@ -478,7 +478,8 @@ def recommend_centers(req: NearestCentersRequest, x_api_key: Optional[str] = Dep
     return NearestCentersResponse(ok=True, status="OK", origin=origin, centers=results[:limit])
 
 
-@app.get("/v1/image/streetview.jpg")
+@app.post("/v1/image/streetview", response_model=StreetviewResponse)
+
 def streetview_jpg(lat: float, lng: float):
     """
     Returns an image (JPEG). Public endpoint (no header required) because the chat UI fetches images without custom headers.
