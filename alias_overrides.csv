@@ -1,0 +1,13 @@
+﻿alias,canonical,resolution,note
+경기도 광주,경기도 광주시,rewrite,광주광역시와 구분
+경기 광주,경기도 광주시,rewrite,광주광역시와 구분
+경기광주,경기도 광주시,rewrite,광주광역시와 구분
+광주광역시,광주광역시,rewrite,광역시 명시
+마산,경상남도 창원시 마산,rewrite_if_region_hint,"지역 힌트가 경남/창원일 때만 자동 보정, 아니면 지역 질문 1회"
+구마산,경상남도 창원시 마산,rewrite_if_region_hint,"지역 힌트가 경남/창원일 때만 자동 보정, 아니면 지역 질문 1회"
+신마산,경상남도 창원시 마산,rewrite_if_region_hint,"지역 힌트가 경남/창원일 때만 자동 보정, 아니면 지역 질문 1회"
+진해,경상남도 창원시 진해,rewrite_if_region_hint,"지역 힌트가 경남/창원일 때만 자동 보정, 아니면 지역 질문 1회"
+온천장,온천장,ask_choice_station_or_area,‘온천장역’ 기준 vs ‘온천장 주변(동네)’ 기준 1회 선택
+자갈치,자갈치,ask_choice_station_or_area,‘자갈치역’ 기준 vs ‘자갈치 주변(동네)’ 기준 1회 선택
+서면,서면,ask_choice_station_or_area,‘서면역’ 기준 vs ‘서면 주변(동네)’ 기준 1회 선택
+강남,강남역,rewrite_to_station,단독 입력 ‘강남’은 기본값으로 ‘강남역’ 기준. 지역/구가 함께 오면 그 힌트를 우선 반영
