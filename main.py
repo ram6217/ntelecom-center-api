@@ -16,6 +16,7 @@ from fastapi import FastAPI, Header, Request, Depends
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 from fastapi.security.api_key import APIKeyHeader
+app = FastAPI(title="Antel Center Locator API", version="1.0.0")
 
 APP_NAME = "ntele-center-api"
 BASE_DIR = Path(__file__).resolve().parent
