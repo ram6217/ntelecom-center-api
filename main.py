@@ -25,34 +25,18 @@ ALIAS_CSV = BASE_DIR / "alias_overrides.csv"
 STATION_CSV = BASE_DIR / "station_defaults.csv"
 CACHE_PATH = BASE_DIR / "center_geocache.json"
 
-ANTEL_ACTIONS_KEY = os.getenv("ANTEL_ACTIONS_KEY", "").strip()
-GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY", "").strip()
-NAVER_MAPS_KEY_ID = os.getenv("NAVER_MAPS_KEY_ID", "").strip()
-NAVER_MAPS_KEY = os.getenv("NAVER_MAPS_KEY", "").strip()
+from fastapi import Depends
+from fastapi.security import APIKeyHeader
+import os
 
+ANTEL_ACTIONS_KEY = os.getenv("ANTEL_ACTIONS_KEY", "").strip()
 api_key_header = APIKeyHeader(name="X-API-KEY", auto_error=False)
 
+def require_api_key(x_api_key: str | None) -> bool:
+    if not ANTEL_ACTIONS_KEY:
+        return True
+    return (x_api_key or "").strip() == ANTEL_ACTIONS_KEY
 
-# ---------------------------------------------------------------------
-# FastAPI
-# ---------------------------------------------------------------------
-app = FastAPI(title="Antel Center Locator API", version="1.0.0")
-
-
-def _now_iso() -> str:
-    return datetime.utcnow().isoformat(timespec="seconds") + "Z"
-
-
-def require_api_key(x_api_key: Optional[str]):
-    """
-    If ANTEL_ACTIONS_KEY is set on the server, require a matching X-API-KEY header.
-    If it's not set, allow requests (useful for local testing).
-    """
-    if ANTEL_ACTIONS_KEY:
-        if not x_api_key or x_api_key.strip() != ANTEL_ACTIONS_KEY:
-            # Return 200 with a structured error to avoid Actions hard-failing on 401/403.
-            # (You can change this to 401 if you prefer.)
-            return False
     return True
 
 
