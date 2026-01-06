@@ -18,11 +18,12 @@ from pydantic import BaseModel, Field
 from fastapi.security.api_key import APIKeyHeader
 
 APP_NAME = "ntele-center-api"
-DATA_DIR = Path(__file__).parent / "data"
-CENTERS_CSV = DATA_DIR / "centers.csv"
-ALIAS_CSV = DATA_DIR / "alias_overrides.csv"
-STATION_CSV = DATA_DIR / "station_defaults.csv"
-CACHE_PATH = DATA_DIR / "center_geocache.json"
+BASE_DIR = Path(__file__).resolve().parent
+
+CENTERS_CSV = BASE_DIR / "centers.csv"
+ALIAS_CSV = BASE_DIR / "alias_overrides.csv"
+STATION_CSV = BASE_DIR / "station_defaults.csv"
+CACHE_PATH = BASE_DIR / "center_geocache.json"
 
 ANTEL_ACTIONS_KEY = os.getenv("ANTEL_ACTIONS_KEY", "").strip()
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY", "").strip()
