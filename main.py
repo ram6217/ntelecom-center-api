@@ -515,8 +515,7 @@ def streetview_jpg(lat: float, lng: float):
     except Exception:
         return Response(content=b"", media_type="image/jpeg", status_code=200)
 
-
-@app.post("/v1/image/streetview", response_model=StreetviewResponse) response_model=StreetviewResponse)
+@app.post("/v1/image/streetview", response_model=StreetviewResponse)
 def streetview(req: StreetviewRequest, request: Request, x_api_key: Optional[str] = Depends(api_key_header)):
     if not require_api_key(x_api_key):
         return StreetviewResponse(ok=False, status="UNAUTHORIZED", message="Invalid X-API-KEY")
